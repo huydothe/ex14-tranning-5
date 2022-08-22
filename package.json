@@ -1,0 +1,16 @@
+{
+  "name": "untitled40",
+  "version": "1.0.0",
+  "description": "",
+  "main": "my.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon my.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.19"
+  }
+}
