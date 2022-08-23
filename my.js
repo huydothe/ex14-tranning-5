@@ -17,13 +17,13 @@ connection.connect(function (err) {
     }
     else {
         console.log("connect success");
-        const sql = "CREATE TABLE IF NOT EXISTS newProducts (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT ,name varchar(30) not null, price INT NOT NULL)";
-        connection.query(sql, function (err) {
-            if (err) {
-                console.log(err);
-            }
-            console.log('Create table success');
-        });
+        // const sql = "CREATE TABLE IF NOT EXISTS newProducts (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT ,name varchar(30) not null, price INT NOT NULL)";
+        // connection.query(sql, function (err) {
+        //     if (err) {
+        //         console.log(err);
+        //     }
+        //     console.log('Create table success');
+        // });
     }
 });
 
@@ -36,13 +36,17 @@ const server = http.createServer(async (req, res) => {
             }
             const data = Buffer.concat(buffers).toString();
             const products = JSON.parse(data);
-            const price = parseInt(products.price);
-            const sqlCreate = `insert into products(name,price) values('${products.name}','${price}');`;
-            connection.query(sqlCreate,(err,results)=>{
-                if(err) throw err;
-                res.end(JSON.stringify(products))
-            });
-        }
+            console.log(products)
+            for(let i =0; i<products.length; i++) {
+                const price = parseInt(products[i].price);
+                const sqlCreate = `insert into newProducts(name,price) values('${products[i].name}','${price}');`;
+                connection.query(sqlCreate,(err,results)=>{
+                    if(err) throw err;
+                    res.end(JSON.stringify(products))
+                });
+            }
+            }
+
     }catch (err){
         return res.end(err.message)
     }
